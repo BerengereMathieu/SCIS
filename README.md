@@ -1,0 +1,2 @@
+# SCIS
+SCIS gimp plugin
