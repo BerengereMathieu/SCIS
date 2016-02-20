@@ -1,0 +1,18 @@
+
+#How to : 
+# Download gimp libraries for window (look on Opensuze repositories)
+#	! http://download.opensuse.org/repositories/windows:/mingw:/win32/openSUSE_Factory/noarch/
+# Download gimp,cairo, gdk-pixbuf and glib headers for window
+# Change the following variables by the corresponding path on your machine
+# Run the following script
+SRC_PATH=/home/berengere/Documents/Portfolio/SCIS
+INCLUDE_PATH=/home/berengere/wCC/grab/usr/i686-w64-mingw32/sys-root/mingw/include
+LIB_PATH=/home/berengere/wCC/grab/usr/i686-w64-mingw32/sys-root/mingw/lib
+
+
+EXE_NAME=scis_win32.exe
+all:
+	i686-w64-mingw32-gcc --static $(SRC_PATH)/SCIS.c -I$(INCLUDE_PATH)/gimp-2.0 -I$(INCLUDE_PATH)/cairo -I$(INCLUDE_PATH)/gdk-pixbuf-2.0 -I$(INCLUDE_PATH)/glib-2.0 -I$(LIB_PATH)/glib-2.0/include -o $(EXE_NAME) $(LIB_PATH)/libgimp-2.0.dll.a $(LIB_PATH)/libglib-2.0.dll.a -lm
+
+
+
