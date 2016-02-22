@@ -3134,10 +3134,6 @@ Image convert_from_gimp_to_image(GimpDrawable *drawable){
     g_free (row);
 
     gimp_drawable_flush (drawable);
-    gimp_drawable_merge_shadow (drawable->drawable_id, TRUE);
-    gimp_drawable_update (drawable->drawable_id,
-                          x1, y1,
-                          x2 - x1, y2 - y1);
     return out;
 }
 
@@ -3299,15 +3295,12 @@ void runSCIS(const GimpParam *param,
         /* get segmentation drawable */
         segmentation_drawable = gimp_drawable_get (segmentationLayer);
     }
-
     gimp_progress_init("load original image...");
     image = convert_from_gimp_to_image(image_drawable);
     gimp_progress_end();
     gimp_progress_init("load seeds...");
     seeds = convert_from_gimp_to_image(seeds_drawable);
     gimp_progress_end();
-
-
 
     algo.C_=4;
     algo.minSize_felzenswalb_=20;
@@ -3318,8 +3311,7 @@ void runSCIS(const GimpParam *param,
     segmentation =  SVMAndSuperpixels_segment(&algo,seeds,image,true);
     if(segmentation){
         gimp_progress_init("drawing segmentation ...");
-        convert_from_Image_to_Gimp(segmentation,segmentation_drawable);
-        /* set opacity  to result at 50 */
+       convert_from_Image_to_Gimp(segmentation,segmentation_drawable);
         gimp_layer_set_opacity(segmentationLayer,50);
 
         gimp_progress_end();
@@ -3333,6 +3325,8 @@ void runSCIS(const GimpParam *param,
 
     delete_Image(&image);
     delete_Image(&seeds);
+
+
     gimp_displays_flush ();
     gimp_drawable_detach (image_drawable);
     gimp_drawable_detach (seeds_drawable);
