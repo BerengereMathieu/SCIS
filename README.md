@@ -38,8 +38,6 @@ along with this program.
 	* create a new layer 
 	* give seeds to algorithm by drawing strokes on this layer : 
 		* use one color by semantic class ;
-		* spatial distribution of seeds must be approximately uniform
-over the image (if you give no seed for top left corners, segmentation quality for this area will be poor) ;
 		* be careful to use uniform color and avoid drawing tools with transparency effect (you can use paintbrush or pencil with brush **2. Hardness 100**)
 	* run SCIS : filter -> segmentation -> SCIS
 	
